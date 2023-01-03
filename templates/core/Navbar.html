@@ -28,14 +28,14 @@
       </div>
     </div>
     <div class="col-md-4 text-right d-none d-md-block">
-      Monday, January 01, 2045
+      {{time}}
     </div>
   </div>
   <div class="row align-items-center py-2 px-lg-5">
     <div class="col-lg-4">
       <a href="" class="navbar-brand d-none d-lg-block">
         <h1 class="m-0 display-5 text-uppercase">
-          <span class="text-primary">News</span>Room
+          <span class="text-primary">Hero</span>Dev
         </h1>
       </a>
     </div>
@@ -53,7 +53,7 @@
   >
     <a href="" class="navbar-brand d-block d-lg-none">
       <h1 class="m-0 display-5 text-uppercase">
-        <span class="text-primary">News</span>Room
+        <span class="text-primary">Hero</span>Dev
       </h1>
     </a>
     <button
@@ -69,9 +69,11 @@
       id="navbarCollapse"
     >
       <div class="navbar-nav mr-auto py-0">
-        <a href="index.html" class="nav-item nav-link active">Home</a>
-        <a href="{% url 'categories' %}" class="nav-item nav-link">Categories</a>
-        <a href="single.html" class="nav-item nav-link">Single News</a>
+        <a href="{% url 'home' %}" class="nav-item nav-link active">Home</a>
+        <a href="{% url 'categories' %}" class="nav-item nav-link"
+          >Categories</a
+        >
+        <a href="{% url 'single' %}" class="nav-item nav-link">Single News</a>
         <div class="nav-item dropdown">
           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
             >Dropdown</a

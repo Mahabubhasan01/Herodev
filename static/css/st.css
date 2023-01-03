@@ -587,7 +587,7 @@ mark,
   font-size: 90%;
   color: #6c757d;
 }
-
+/* 
 code {
   font-size: 87.5%;
   color: #e83e8c;
@@ -596,6 +596,22 @@ code {
 
 a > code {
   color: inherit;
+} */
+.code__content{
+  padding: 1em;
+  background: #f4f2f2;
+  border-left: 3px solid #343a40;
+
+
+}
+.code {
+  display: block;
+  color: #cd7474;
+  font-size: .875em;
+  font-family: inherit;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  
 }
 
 kbd {
