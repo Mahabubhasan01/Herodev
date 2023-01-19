@@ -4,7 +4,7 @@
   {% load static %}
   <head>
     <meta charset="utf-8" />
-    <title>NEWSROOM - Free Bootstrap Magazine Template</title>
+    <title>{% block title %}Blog | {{blog.title}}{% endblock title %}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="Free HTML Templates" name="keywords" />
     <meta content="Free HTML Templates" name="description" />
@@ -42,10 +42,12 @@
     <div class="container-fluid">
       <div class="container">
         <nav class="breadcrumb bg-transparent m-0 p-0">
-          <a class="breadcrumb-item" href="#">Home</a>
-          <a class="breadcrumb-item" href="#">Category</a>
-          <a class="breadcrumb-item" href="#">Technology</a>
-          <span class="breadcrumb-item active">News Title</span>
+          <a class="breadcrumb-item" href="{% url 'home' %}">Home</a>
+          <a class="breadcrumb-item" href="{% url 'categories' %}">Category</a>
+          <a class="breadcrumb-item" href="{% url 'category' blog.category %}"
+            >{{blog.category}}</a
+          >
+          <span class="breadcrumb-item active">{{blog.title}}</span>
         </nav>
       </div>
     </div>
@@ -60,102 +62,32 @@
             <div class="position-relative mb-3">
               <img
                 class="img-fluid w-100"
-                src="{% static 'img/news-700x435-2.jpg'%}"
-                style="object-fit: cover"
+                src="{{blog.image.url}}"
+                style="object-fit: cover; border-radius: 5px"
               />
               <div class="overlay position-relative bg-light">
                 <div class="mb-3">
-                  <a href="">Technology</a>
+                  <a href="{% url 'category' blog.category %}"
+                    >{{blog.category |upper}}</a
+                  >
                   <span class="px-1">|</span>
-                  <span>January 01, 2045</span>
+                  <span>{{blog.post_date}}</span>
                   <span class="px-1">|</span>
-                  <span><i class="fa fa-user"></i> Mahabub</span>
+                  <span><i class="fa fa-user"></i> {{user.username}}</span>
                 </div>
                 <div class="">
-                  <h3 class="mb-3">Est stet amet ipsum stet clita rebum duo</h3>
+                  <h3 class="mb-3">{{blog.title}}</h3>
+                  <p>{{blog.overview}}</p>
                   <div class="code__content">
-                    <code class="code">
-                      from fastapi import FastAPI from pydantic import BaseModel
-                      from sqlalchemy.ext.declarative import declarative_base
-                      from sqlalchemy import create_engine, Column, Integer,
-                      String from sqlalchemy.orm import sessionmaker # Set
-                      updatabase Base = declarative_base() engine =
-                      create_engine("sqlite:///todos.db") class Todo(Base):
-                      __tablename__ = "todos" id = Column(Integer,
-                      primary_key=True) title = Column(String) description =
-                      Column(String) Base.metadata.create_all(bind=engine)
-                      Session = sessionmaker(bind=engine) session = Session() #
-                      Define request and response objects class
-                      TodoCreate(BaseModel): title: str description: str class
-                      TodoUpdate(BaseModel): title: str description: str class
-                      TodoOut(BaseModel): id: int title: str description: str #
-                      Create FastAPI app app = FastAPI() # CRUD routes
-                      @app.post("/todos") def create_todo(todo: TodoCreate):
-                      new_todo = Todo(title=todo.title,
-                      description=todo.description) session.add(new_todo)
-                      session.commit() return {"id": new_todo.id, "title":
-                      new_todo.title, "description": new_todo.description}
-                      @app.get("/todos/{todo_id}") def read_todo(todo_id: int):
-                      todo = session.query(Todo).get(todo_id) if todo: return
-                      {"id": todo.id, "title": todo.title, "description":
-                      todo.description} else: return {"error": "Todo not found"}
-                      @app.put("/todos/{todo_id}") def update_todo(todo_id: int,
-                      todo: TodoUpdate): todo_record =
-                      session.query(Todo).get(todo_id) if todo_record:
-                      todo_record.title = todo.title
-                    </code>
+                    <code class="code">{{blog.code}} </code>
                   </div>
-                  <p>
-                    Voluptua est takimata stet invidunt sed rebum nonumy stet,
-                    clita aliquyam dolores vero stet consetetur elitr takimata
-                    rebum sanctus. Sit sed accusam stet sit nonumy kasd diam
-                    dolores, sanctus lorem kasd duo dolor dolor vero sit et.
-                    Labore ipsum duo sanctus amet eos et. Consetetur no sed et
-                    aliquyam ipsum justo et, clita lorem sit vero amet amet est
-                    dolor elitr, stet et no diam sit. Dolor erat justo dolore
-                    sit invidunt.
-                  </p>
-                  <h4 class="mb-3">Est dolor lorem et ea</h4>
+
+                  <h4 class="mb-3">{{blog.title}}</h4>
                   <img
                     class="img-fluid w-50 float-left mr-4 mb-2"
-                    src="{% static 'img/news-500x280-1.jpg'%}"
+                    src="{{blog.image.url}}"
                   />
-                  <p>
-                    Diam dolor est labore duo invidunt ipsum clita et, sed et
-                    lorem voluptua tempor invidunt at est sanctus sanctus. Clita
-                    dolores sit kasd diam takimata justo diam lorem sed. Magna
-                    amet sed rebum eos. Clita no magna no dolor erat diam tempor
-                    rebum consetetur, sanctus labore sed nonumy diam lorem amet
-                    eirmod. No at tempor sea diam kasd, takimata ea nonumy elitr
-                    sadipscing gubergren erat. Gubergren at lorem invidunt
-                    sadipscing rebum sit amet ut ut, voluptua diam dolores at
-                    sadipscing stet. Clita dolor amet dolor ipsum vero ea ea
-                    eos. Invidunt sed diam dolores takimata dolor dolore dolore
-                    sit. Sit ipsum erat amet lorem et, magna sea at sed et eos.
-                    Accusam eirmod kasd lorem clita sanctus ut consetetur et. Et
-                    duo tempor sea kasd clita ipsum et.
-                  </p>
-                  <h5 class="mb-3">Est dolor lorem et ea</h5>
-                  <img
-                    class="img-fluid w-50 float-right ml-4 mb-2"
-                    src="{% static 'img/news-500x280-2.jpg'%}"
-                  />
-                  <p>
-                    Diam dolor est labore duo invidunt ipsum clita et, sed et
-                    lorem voluptua tempor invidunt at est sanctus sanctus. Clita
-                    dolores sit kasd diam takimata justo diam lorem sed. Magna
-                    amet sed rebum eos. Clita no magna no dolor erat diam tempor
-                    rebum consetetur, sanctus labore sed nonumy diam lorem amet
-                    eirmod. No at tempor sea diam kasd, takimata ea nonumy elitr
-                    sadipscing gubergren erat. Gubergren at lorem invidunt
-                    sadipscing rebum sit amet ut ut, voluptua diam dolores at
-                    sadipscing stet. Clita dolor amet dolor ipsum vero ea ea
-                    eos. Invidunt sed diam dolores takimata dolor dolore dolore
-                    sit. Sit ipsum erat amet lorem et, magna sea at sed et eos.
-                    Accusam eirmod kasd lorem clita sanctus ut consetetur et. Et
-                    duo tempor sea kasd clita ipsum et. Takimata kasd diam justo
-                    est eos erat aliquyam et ut.
-                  </p>
+                  <p>{{blog.description}}</p>
                 </div>
               </div>
             </div>
@@ -163,30 +95,27 @@
 
             <!-- Comment List Start -->
             <div class="bg-light mb-3" style="padding: 30px">
-              <h3 class="mb-4">3 Comments</h3>
+              <h3 class="mb-4">{{comments.count}} Comments</h3>
+              {% if comments %} {% for comment in comments %}
               <div class="media mb-4">
                 <img
-                  src="{% static 'img/user.jpg'%}"
+                  src="{{comment.commenter_image}}"
                   alt="Image"
                   class="img-fluid mr-3 mt-1"
                   style="width: 45px"
                 />
                 <div class="media-body">
                   <h6>
-                    <a href="">John Doe</a> <small><i>01 Jan 2045</i></small>
+                    <a href="">{{comment.commenter_name.username}}</a>
+                    <small><i>{{comment.comment_post_date}}</i></small>
                   </h6>
-                  <p>
-                    Diam amet duo labore stet elitr invidunt ea clita ipsum
-                    voluptua, tempor labore accusam ipsum et no at. Kasd diam
-                    tempor rebum magna dolores sed sed eirmod ipsum. Gubergren
-                    clita aliquyam consetetur sadipscing, at tempor amet ipsum
-                    diam tempor consetetur at sit.
-                  </p>
+                  <p>{{comment.comment_text}}</p>
                   <button class="btn btn-sm btn-outline-secondary">
                     Reply
                   </button>
                 </div>
               </div>
+              {% endfor %} {% endif %}
               <div class="media">
                 <img
                   src="{% static 'img/user.jpg'%}"
@@ -380,9 +309,11 @@
               <div class="bg-light py-2 px-4 mb-3">
                 <h3 class="m-0">Tranding</h3>
               </div>
+              {% if blogs %} {% for blg in blogs %}
+
               <div class="d-flex mb-3">
                 <img
-                  src="{% static 'img/news-100x100-1.jpg'%}"
+                  src="{{blg.image.url}}"
                   style="width: 100px; height: 100px; object-fit: cover"
                 />
                 <div
@@ -390,91 +321,20 @@
                   style="height: 100px"
                 >
                   <div class="mb-1" style="font-size: 13px">
-                    <a href="">Technology</a>
-                    <span class="px-1">/</span>
-                    <span>January 01, 2045</span>
+                    <a href="{% url 'category' blg.category %}"
+                      >{{blg.category}}</a
+                    >
+                    <span class="px-1">|</span>
+                    <span>{{blg.post_date}}</span>
                   </div>
-                  <a class="h6 m-0" href=""
-                    >Lorem ipsum dolor sit amet consec adipis elit</a
+                  <a
+                    class="h6 m-0"
+                    href="{% url 'page_details' blg.category blg.title blg.id %}"
+                    >{{blg.title}}</a
                   >
                 </div>
               </div>
-              <div class="d-flex mb-3">
-                <img
-                  src="{% static 'img/news-100x100-2.jpg'%}"
-                  style="width: 100px; height: 100px; object-fit: cover"
-                />
-                <div
-                  class="w-100 d-flex flex-column justify-content-center bg-light px-3"
-                  style="height: 100px"
-                >
-                  <div class="mb-1" style="font-size: 13px">
-                    <a href="">Technology</a>
-                    <span class="px-1">/</span>
-                    <span>January 01, 2045</span>
-                  </div>
-                  <a class="h6 m-0" href=""
-                    >Lorem ipsum dolor sit amet consec adipis elit</a
-                  >
-                </div>
-              </div>
-              <div class="d-flex mb-3">
-                <img
-                  src="img/news-100x100-3.jpg"
-                  style="width: 100px; height: 100px; object-fit: cover"
-                />
-                <div
-                  class="w-100 d-flex flex-column justify-content-center bg-light px-3"
-                  style="height: 100px"
-                >
-                  <div class="mb-1" style="font-size: 13px">
-                    <a href="">Technology</a>
-                    <span class="px-1">/</span>
-                    <span>January 01, 2045</span>
-                  </div>
-                  <a class="h6 m-0" href=""
-                    >Lorem ipsum dolor sit amet consec adipis elit</a
-                  >
-                </div>
-              </div>
-              <div class="d-flex mb-3">
-                <img
-                  src="img/news-100x100-4.jpg"
-                  style="width: 100px; height: 100px; object-fit: cover"
-                />
-                <div
-                  class="w-100 d-flex flex-column justify-content-center bg-light px-3"
-                  style="height: 100px"
-                >
-                  <div class="mb-1" style="font-size: 13px">
-                    <a href="">Technology</a>
-                    <span class="px-1">/</span>
-                    <span>January 01, 2045</span>
-                  </div>
-                  <a class="h6 m-0" href=""
-                    >Lorem ipsum dolor sit amet consec adipis elit</a
-                  >
-                </div>
-              </div>
-              <div class="d-flex mb-3">
-                <img
-                  src="img/news-100x100-5.jpg"
-                  style="width: 100px; height: 100px; object-fit: cover"
-                />
-                <div
-                  class="w-100 d-flex flex-column justify-content-center bg-light px-3"
-                  style="height: 100px"
-                >
-                  <div class="mb-1" style="font-size: 13px">
-                    <a href="">Technology</a>
-                    <span class="px-1">/</span>
-                    <span>January 01, 2045</span>
-                  </div>
-                  <a class="h6 m-0" href=""
-                    >Lorem ipsum dolor sit amet consec adipis elit</a
-                  >
-                </div>
-              </div>
+              {% endfor %} {% endif %}
             </div>
             <!-- Popular News End -->
 
