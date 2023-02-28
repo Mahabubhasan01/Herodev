@@ -2,14 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
   {% load static %}
-  <head>
-    <meta charset="utf-8" />
-    <title>{% block title %}{{blog.category}}{% endblock title %}</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="Free HTML Templates" name="keywords" />
-    <meta content="Free HTML Templates" name="description" />
-  </head>
-
+  <title>{% block title %}{{blog.category}}{% endblock title %}</title>
   <body>
     <!-- Breadcrumb Start -->
     <div class="container-fluid">
@@ -318,11 +311,15 @@
                   style="height: 100px"
                 >
                   <div class="mb-1" style="font-size: 13px">
-                    <a href="{% url 'category' blog.category %}">{{blog.category}}</a>
+                    <a href="{% url 'category' blog.category %}"
+                      >{{blog.category}}</a
+                    >
                     <span class="px-1">|</span>
                     <span>{{blog.post_date}}</span>
                   </div>
-                  <a class="h6 m-0" href="{% url 'page_details' blog.category blog.title blog.id %}"
+                  <a
+                    class="h6 m-0"
+                    href="{% url 'page_details' blog.category blog.title blog.id %}"
                     >{{blog.title}}</a
                   >
                 </div>

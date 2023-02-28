@@ -54,3 +54,11 @@ def Blog_detail_Page(request, category, title, pk):
         'cat': category,
     }
     return render(request, 'blog_detail.html', context)
+number = 321
+digit_sum = 0
+
+# Convert number to string to access each digit
+for digit in str(number):
+    digit_sum += int(digit)
+
+print(digit_sum)
